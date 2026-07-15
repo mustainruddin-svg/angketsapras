@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angket Evaluasi Kinerja Tim Sarpras — SMPIT/SMAIT Ar-Rahmah</title>
+<style>
+  :root{
+    --primary:#3B9CE8;
+    --primary-dark:#1A73B8;
+    --primary-light:#EAF4FD;
+    --gold:#C9A227;
+    --white:#FFFFFF;
+    --text:#1F2937;
+    --text-soft:#5B6472;
+    --border:#E1E8F0;
+    --danger:#E05252;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,var(--primary-light) 0%,var(--white) 220px);
+    color:var(--text);
+    padding-bottom:60px;
+  }
+  header{
+    background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+    color:var(--white);
+    padding:28px 20px 34px;
+    border-radius:0 0 28px 28px;
+    text-align:center;
+    box-shadow:0 6px 18px rgba(26,115,184,0.25);
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--gold);
+    color:#3A2E00;
+    font-size:12px;
+    font-weight:700;
+    padding:4px 12px;
+    border-radius:999px;
+    margin-bottom:10px;
+    letter-spacing:.3px;
+  }
+  header h1{
+    margin:6px 0 4px;
+    font-size:20px;
+    line-height:1.4;
+  }
+  header p{
+    margin:0;
+    font-size:13.5px;
+    opacity:.92;
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:640px;
+    margin:-14px auto 0;
+    padding:0 16px;
+  }
+  .intro-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    box-shadow:0 4px 16px rgba(31,41,55,0.06);
+    border:1px solid var(--border);
+    font-size:13.5px;
+    color:var(--text-soft);
+    line-height:1.6;
+    margin-bottom:18px;
+  }
+  .section{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:18px 18px 8px;
+    margin-bottom:16px;
+    border:1px solid var(--border);
+    box-shadow:0 2px 10px rgba(31,41,55,0.04);
+  }
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:4px;
+  }
+  .section-title .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--gold);
+    flex-shrink:0;
+  }
+  .section-sub{
+    font-size:12px;
+    color:var(--text-soft);
+    margin-bottom:14px;
+  }
+  label.field-label{
+    display:block;
+    font-size:13.5px;
+    font-weight:600;
+    margin:14px 0 8px;
+    color:var(--text);
+  }
+  input[type=text], select, textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    font-size:14px;
+    font-family:inherit;
+    background:#FAFCFF;
+    color:var(--text);
+  }
+  textarea{resize:vertical;min-height:70px;}
+  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6472' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px;}
+  input:focus, select:focus, textarea:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(59,156,232,0.15);
+  }
+  .likert{
+    margin:14px 0 18px;
+    padding-bottom:14px;
+    border-bottom:1px dashed var(--border);
+  }
+  .likert:last-child{border-bottom:none;}
+  .likert-q{
+    font-size:13.5px;
+    font-weight:600;
+    margin-bottom:10px;
+    line-height:1.45;
+  }
+  .likert-q .num{color:var(--primary-dark);font-weight:700;}
+  .scale{
+    display:flex;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .scale-opt{
+    flex:1;
+    text-align:center;
+  }
+  .scale-opt input{
+    display:none;
+  }
+  .scale-opt label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    cursor:pointer;
+    padding:8px 2px;
+    border-radius:10px;
+    border:1.5px solid var(--border);
+    background:#FAFCFF;
+    transition:all .15s;
+  }
+  .scale-opt input:checked + label{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:var(--white);
+  }
+  .scale-opt .n{font-size:14px;font-weight:700;}
+  .scale-opt .t{font-size:9px;color:inherit;opacity:.85;}
+  .scale-legend{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:var(--text-soft);
+    margin-top:4px;
+    padding:0 2px;
+  }
+  .checkbox-grid{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .checkbox-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    background:#FAFCFF;
+    cursor:pointer;
+  }
+  .checkbox-item input{width:17px;height:17px;accent-color:var(--primary);}
+  .checkbox-item span{font-size:13.5px;}
+  .submit-btn{
+    width:100%;
+    background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+    color:var(--white);
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:6px;
+    box-shadow:0 6px 16px rgba(26,115,184,0.28);
+  }
+  .submit-btn:disabled{opacity:.6;}
+  .note{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--text-soft);
+    margin:10px 0 24px;
+    line-height:1.6;
+  }
+  .status{
+    text-align:center;
+    font-size:13px;
+    margin-top:10px;
+    min-height:18px;
+    font-weight:600;
+  }
+  .status.err{color:var(--danger);}
+  .status.ok{color:#1A8B4E;}
+  #successScreen{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+  }
+  #successScreen .check{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--primary-light);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+    font-size:32px;color:var(--primary);
+  }
+  #successScreen h2{color:var(--primary-dark);margin-bottom:8px;font-size:18px;}
+  #successScreen p{color:var(--text-soft);font-size:13.5px;line-height:1.6;}
+  .required-mark{color:var(--danger);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">YAYASAN AR-RAHMAH SULAWESI</div>
+  <h1>Angket Evaluasi Kinerja<br>Tim Sarana &amp; Prasarana</h1>
+  <p>Unit SMPIT &amp; SMAIT Ar-Rahmah Makassar</p>
+</header>
+
+<div class="wrap">
+
+  <div class="intro-card">
+    Bapak/Ibu Guru yang kami hormati, mohon kesediaannya mengisi angket ini secara jujur dan objektif.
+    Penilaian ini akan menjadi bahan evaluasi pimpinan yayasan untuk meningkatkan kualitas layanan sarana &amp; prasarana sekolah.
+    Identitas Bapak/Ibu bersifat rahasia dan hanya digunakan untuk keperluan internal. Waktu pengisian ± 4 menit.
+  </div>
+
+  <form id="angketForm">
+
+    <!-- A. DATA RESPONDEN -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> A. Data Responden</div>
+      <div class="section-sub">Data ini bersifat rahasia dan hanya untuk keperluan internal yayasan.</div>
+
+      <label class="field-label">Nama <span style="font-weight:400;color:var(--text-soft);">(opsional — boleh dikosongkan)</span></label>
+      <input type="text" id="nama" placeholder="Nama Bapak/Ibu">
+
+      <label class="field-label">Unit <span class="required-mark">*</span></label>
+      <select id="unit" required>
+        <option value="">Pilih unit</option>
+        <option value="SMPIT">SMPIT</option>
+        <option value="SMAIT">SMAIT</option>
+      </select>
+
+      <label class="field-label">Jabatan / Mengajar Mapel <span class="required-mark">*</span></label>
+      <input type="text" id="jabatan" placeholder="Contoh: Guru Matematika / Wali Kelas" required>
+
+      <label class="field-label">Lama Mengajar di Ar-Rahmah <span class="required-mark">*</span></label>
+      <select id="lama" required>
+        <option value="">Pilih durasi</option>
+        <option value="< 1 tahun">Kurang dari 1 tahun</option>
+        <option value="1-3 tahun">1–3 tahun</option>
+        <option value="3-5 tahun">3–5 tahun</option>
+        <option value="> 5 tahun">Lebih dari 5 tahun</option>
+      </select>
+    </div>
+
+    <!-- B. KETANGGAPAN -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> B. Ketanggapan &amp; Kecepatan Layanan</div>
+      <div class="section-sub">1 = Sangat Kurang · 5 = Sangat Baik</div>
+      <div id="likertB"></div>
+    </div>
+
+    <!-- C. KUALITAS -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> C. Kualitas Pekerjaan</div>
+      <div class="section-sub">1 = Sangat Kurang · 5 = Sangat Baik</div>
+      <div id="likertC"></div>
+    </div>
+
+    <!-- D. KOMUNIKASI -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> D. Komunikasi &amp; Koordinasi</div>
+      <div class="section-sub">1 = Sangat Kurang · 5 = Sangat Baik</div>
+      <div id="likertD"></div>
+    </div>
+
+    <!-- E. KETERSEDIAAN -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> E. Ketersediaan &amp; Kesiapan Sarana</div>
+      <div class="section-sub">1 = Sangat Kurang · 5 = Sangat Baik</div>
+      <div id="likertE"></div>
+    </div>
+
+    <!-- F. SIKAP -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> F. Sikap &amp; Profesionalisme</div>
+      <div class="section-sub">1 = Sangat Kurang · 5 = Sangat Baik</div>
+      <div id="likertF"></div>
+    </div>
+
+    <!-- G. PENILAIAN KESELURUHAN -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> G. Penilaian Keseluruhan</div>
+      <div id="likertG"></div>
+
+      <label class="field-label">Aspek apa yang paling perlu diperbaiki? <span style="font-weight:400;color:var(--text-soft);">(boleh pilih lebih dari satu)</span></label>
+      <div class="checkbox-grid" id="perbaikan"></div>
+    </div>
+
+    <!-- H. MASUKAN TERBUKA -->
+    <div class="section">
+      <div class="section-title"><span class="dot"></span> H. Masukan Terbuka</div>
+
+      <label class="field-label">Pengalaman spesifik (positif/negatif) yang ingin disampaikan</label>
+      <textarea id="pengalaman" placeholder="Tuliskan pengalaman Bapak/Ibu..."></textarea>
+
+      <label class="field-label">Saran perbaikan untuk tim sarpras ke depan</label>
+      <textarea id="saran" placeholder="Tuliskan saran Bapak/Ibu..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="btnSubmit">Kirim Penilaian</button>
+    <div class="status" id="statusMsg"></div>
+    <div class="note">Jawaban Bapak/Ibu bersifat rahasia dan hanya digunakan untuk evaluasi internal yayasan.</div>
+  </form>
+
+  <div id="successScreen">
+    <div class="check">✓</div>
+    <h2>Terima kasih, Bapak/Ibu!</h2>
+    <p>Penilaian Bapak/Ibu telah tersimpan dan akan menjadi bahan evaluasi pimpinan yayasan untuk peningkatan layanan sarana &amp; prasarana sekolah.</p>
+  </div>
+
+</div>
+
+<script>
+// ==== GANTI DENGAN URL WEB APP APPS SCRIPT SETELAH DEPLOY ====
+const API_URL = "GANTI_DENGAN_URL_WEBAPP_APPS_SCRIPT";
+
+const SCALE_LABELS = ["Sangat\nKurang","Kurang","Cukup","Baik","Sangat\nBaik"];
+
+const QUESTIONS = {
+  B: [
+    {id:"q5", text:"Tim sarpras merespons cepat saat ada laporan kerusakan (AC, listrik, meja/kursi, dll)"},
+    {id:"q6", text:"Waktu penyelesaian perbaikan sesuai dengan tingkat urgensi masalah"},
+    {id:"q7", text:"Ada tindak lanjut / kabar jika perbaikan membutuhkan waktu lama"},
+  ],
+  C: [
+    {id:"q8", text:"Hasil perbaikan/pemeliharaan tahan lama, tidak rusak ulang dalam waktu dekat"},
+    {id:"q9", text:"Fasilitas kelas (proyektor, papan tulis, kipas/AC, kursi-meja) dalam kondisi layak pakai"},
+    {id:"q10", text:"Kebersihan dan kerapian lingkungan sekolah terjaga dengan baik"},
+  ],
+  D: [
+    {id:"q11", text:"Mudah menghubungi / melaporkan kendala ke tim sarpras (alur jelas, ada PIC)"},
+    {id:"q12", text:"Tim sarpras komunikatif dan sopan saat berinteraksi dengan guru"},
+    {id:"q13", text:"Ada sistem pelaporan yang jelas (WA grup/form), bukan harus mencari orang secara manual"},
+  ],
+  E: [
+    {id:"q14", text:"Sarana pendukung KBM (alat peraga, sound system, dll) tersedia saat dibutuhkan"},
+    {id:"q15", text:"Persiapan sarana untuk acara/kegiatan sekolah (ujian, event, rapat) berjalan baik"},
+  ],
+  F: [
+    {id:"q16", text:"Tim sarpras menunjukkan sikap kerja yang profesional dan bertanggung jawab"},
+    {id:"q17", text:"Tim sarpras proaktif, tidak hanya menunggu instruksi"},
+  ],
+  G: [
+    {id:"q18", text:"Secara umum, saya puas dengan kinerja tim sarpras"},
+  ],
+};
+
+const PERBAIKAN_OPTIONS = [
+  "Kecepatan respons",
+  "Kualitas perbaikan",
+  "Komunikasi",
+  "Kebersihan lingkungan",
+  "Kelengkapan sarana KBM",
+  "Sikap/profesionalisme petugas",
+  "Lainnya",
+];
+
+function renderLikert(containerId, items) {
+  const container = document.getElementById(containerId);
+  items.forEach((item, idx) => {
+    const block = document.createElement("div");
+    block.className = "likert";
+    block.innerHTML = `
+      <div class="likert-q"><span class="num">${idx + 1}.</span> ${item.text}</div>
+      <div class="scale">
+        ${[1,2,3,4,5].map(v => `
+          <div class="scale-opt">
+            <input type="radio" name="${item.id}" id="${item.id}_${v}" value="${v}" required>
+            <label for="${item.id}_${v}"><span class="n">${v}</span></label>
+          </div>
+        `).join("")}
+      </div>
+      <div class="scale-legend"><span>Sangat Kurang</span><span>Sangat Baik</span></div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+renderLikert("likertB", QUESTIONS.B);
+renderLikert("likertC", QUESTIONS.C);
+renderLikert("likertD", QUESTIONS.D);
+renderLikert("likertE", QUESTIONS.E);
+renderLikert("likertF", QUESTIONS.F);
+renderLikert("likertG", QUESTIONS.G);
+
+const perbaikanContainer = document.getElementById("perbaikan");
+PERBAIKAN_OPTIONS.forEach((opt, i) => {
+  const div = document.createElement("label");
+  div.className = "checkbox-item";
+  div.innerHTML = `<input type="checkbox" name="perbaikan" value="${opt}"><span>${opt}</span>`;
+  perbaikanContainer.appendChild(div);
+});
+
+document.getElementById("angketForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const btn = document.getElementById("btnSubmit");
+  const statusEl = document.getElementById("statusMsg");
+  statusEl.textContent = "";
+  statusEl.className = "status";
+
+  if (API_URL.indexOf("GANTI_DENGAN") !== -1) {
+    statusEl.textContent = "URL backend belum diatur. Hubungi admin sistem.";
+    statusEl.className = "status err";
+    return;
+  }
+
+  const allIds = [...QUESTIONS.B, ...QUESTIONS.C, ...QUESTIONS.D, ...QUESTIONS.E, ...QUESTIONS.F, ...QUESTIONS.G];
+  const payload = {
+    nama: document.getElementById("nama").value.trim(),
+    unit: document.getElementById("unit").value,
+    jabatan: document.getElementById("jabatan").value.trim(),
+    lama: document.getElementById("lama").value,
+    pengalaman: document.getElementById("pengalaman").value.trim(),
+    saran: document.getElementById("saran").value.trim(),
+  };
+
+  allIds.forEach(item => {
+    const checked = document.querySelector(`input[name="${item.id}"]:checked`);
+    payload[item.id] = checked ? checked.value : "";
+  });
+
+  const perbaikanChecked = Array.from(document.querySelectorAll('input[name="perbaikan"]:checked')).map(el => el.value);
+  payload.perbaikan = perbaikanChecked.join(", ");
+
+  btn.disabled = true;
+  btn.textContent = "Mengirim...";
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" }, // wajib text/plain agar tidak kena CORS preflight di Apps Script
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    if (data.status === "ok") {
+      document.getElementById("angketForm").style.display = "none";
+      document.getElementById("successScreen").style.display = "block";
+      window.scrollTo({top:0, behavior:"smooth"});
+    } else {
+      throw new Error(data.message || "Gagal mengirim data.");
+    }
+  } catch (err) {
+    statusEl.textContent = "Gagal mengirim: " + err.message + ". Silakan coba lagi.";
+    statusEl.className = "status err";
+    btn.disabled = false;
+    btn.textContent = "Kirim Penilaian";
+  }
+});
+</script>
+
+</body>
+</html>
